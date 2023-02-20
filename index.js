@@ -3,4 +3,5 @@ const port = 3000;
 const app = express
 
 
-require('./db')
+require('./db');
+require('./schemas/Course');
