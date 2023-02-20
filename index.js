@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 require('./db');
 require('./schemas/GroupChat');
 require('./schemas/Message');
+require('./models/User');
+require('./models/Message');
 const authRoutes = require('./routes/AuthRoutes');
 const uploadMediaRoutes = require('./routes/SendFiles');
 const messageRoutes = require('./routes/MessageRoutes');
