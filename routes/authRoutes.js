@@ -29,10 +29,10 @@ router.post('/signup', async (req, res)=>{
                     })
                     await user.save();
                     const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET);
-                    return res.status(200).json({message: "user added"}, token);
+                    return res.status(200).json({message: "user added"});
                 }catch(err){
                     console.log(err);
-                    return res.status(422).json({message: "user not registered"});
+                    return res.status(200).json({message: "user not registered"});
                 }
             }
         })

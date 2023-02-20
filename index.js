@@ -1,6 +1,7 @@
 const express = require('express');
 const port = 3000;
 const app = express();
+const profileRoutes = require('./routes/profileRoutes');
 const bodyParser = require('body-parser');
 require('./db');
 require('./schemas/GroupChat');
@@ -28,6 +29,7 @@ const io = new Server(httpServer, { /* options */ });
 
 app.use(bodyParser.json());
 app.use(authRoutes);
+app.use(profileRoutes);
 app.use(uploadMediaRoutes);
 app.use(messageRoutes);
 
@@ -63,7 +65,7 @@ httpServer.listen(3001);
 // ...
 app.listen(port, () => {
     console.log("Server is running on port " + port);
-})
+});
 
 
 
