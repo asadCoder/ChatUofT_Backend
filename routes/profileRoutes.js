@@ -17,7 +17,27 @@ router.get('/profile', (req, res) => {
     res.send(req.body);
 });
 
-
+// router.get('/fetchprofile', async (req, res) => {
+//     const utorid = req.userId;
+//     const db = mongoose.connection.db;
+//     db.collection('profiles').find().toArray((courses, results) => {
+//         for (const result of results) {
+//             if (result.utorid === utorid) {
+//                 return res.status(200).json({result});
+//             }
+//         }
+//     });/*
+//     mongoose.connect('mongodb+srv://uoft:uoft@database1.muiq2mi.mongodb.net/?retryWrites=true&w=majority').then(() => {
+//         const db = mongoose.connection.db;
+//         db.collection('profiles]').find().toArray((courses, results) => {
+//             for (const result of results) {
+//                 if (result.utorid === utorid) {
+//                     return res.status(200).json({result});
+//                 }
+//             }
+//         });
+//     }).catch(err => console.log(err.message))*/
+// });
 
 router.post('/newprofile', async (req, res) => {
     const {utorid, name, age} = req.body || {};
