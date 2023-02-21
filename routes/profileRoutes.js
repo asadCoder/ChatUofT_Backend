@@ -65,7 +65,7 @@ router.post('/fetchprofile', async (req, res) => {
 });
 
 router.post('/fetchMockChat', async (req, res) => {
-    res.send().json({
+    return res.status(200).json({
         id: "1",
         name: "Novu Hangouts",
         messages: [
