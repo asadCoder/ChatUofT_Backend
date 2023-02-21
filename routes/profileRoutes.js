@@ -2,18 +2,14 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require("mongoose");
 
-//const User = mongose.model("User");
 const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
-//const nodemiler = require("nodemailer");
-//const ProfileSchema = require('../schemas/Profile');
 const Profile = mongoose.model("Profile");
-//const User = require('../schemas/User');
+;
 
 router.get('/profile', (req, res) => {
-    //res.send("verify called");
     res.send(req.body);
 });
 
@@ -91,8 +87,10 @@ router.post('/newprofile', async (req, res) => {
     }
 
 });
+
 router.delete('/profile', (req, res) => {
     res.send("verify called");
     res.send("verify called");
 });
+
 module.exports = router;
