@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 require('./schemas/Profile');
 const express = require ('express');
 const authRoutes = require('./routes/authRoutes');
-const port = 3002;
+const port = 8000;
 const app = express();
 const profileRoutes = require('./routes/profileRoutes');
 
