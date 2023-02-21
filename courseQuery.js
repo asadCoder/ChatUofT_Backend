@@ -1,4 +1,4 @@
-async function query() {
+async function query(utorid) {
     const MongoClient = require('mongodb').MongoClient;
   
     // Connection URL and database name
@@ -6,7 +6,7 @@ async function query() {
     const dbName = 'test';
   
     // Define the utorid of the profile to find
-    const utorid = '333';
+    //const utorid = '333';
   
     // Connect to the database and find the profile by utorid
     const client = await MongoClient.connect(url, { useUnifiedTopology: true, useNewUrlParser: true });
@@ -36,7 +36,7 @@ async function query() {
   
         // Update the chat_ids field of the corresponding profile item
         const updateQuery = { utorid: utorid };
-        const updateValues = { $addToSet: { chat_ids: courseCode } };
+        const updateValues = { $addToSet: { chat_id: courseCode } };
         await profilesCollection.updateOne(updateQuery, updateValues);
         console.log(`Course with code ${courseCode} added to chat_ids field of profile with utorid ${utorid}.`);
       } else {
@@ -47,7 +47,7 @@ async function query() {
   
         // Update the chat_ids field of the corresponding profile item
         const updateQuery = { utorid: utorid };
-        const updateValues = { $addToSet: { chat_ids: courseCode } };
+        const updateValues = { $addToSet: { chat_id: courseCode } };
         await profilesCollection.updateOne(updateQuery, updateValues);
         console.log(`Course with code ${courseCode} added to chat_ids field of profile with utorid ${utorid}.`);
       }
@@ -58,7 +58,7 @@ async function query() {
   
   async function main() {
     try {
-      await query();
+      await query('333');
       console.log('Query completed successfully.');
     } catch (error) {
       console.error(error);
