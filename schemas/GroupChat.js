@@ -8,10 +8,6 @@ const message_schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    roomid:{
-        type: String,
-        required: true
-    },
     senderid: {
         type: String,
         required: true
@@ -20,7 +16,7 @@ const message_schema = new mongoose.Schema({
         type: String,
     },
     recieverid:{
-        type: String,
+        type: Array,
         required: true
     }
 },{
@@ -30,16 +26,16 @@ const message_schema = new mongoose.Schema({
 const gc_schema = new mongoose.Schema({
     chat_ids:
     {
-        type: String,
+        type: Array,
         required: true
     },
     user_ids: {
         type: Array,
         required: true
     },
-    messages:{
-        type: [message_schema],
-    },
+    message:{
+        type: message_schema
+    }
 
 })
 

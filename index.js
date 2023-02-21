@@ -1,13 +1,13 @@
 const express = require('express');
 const port = 3000;
 const app = express();
-const profileRoutes = require('./routes/profileRoutes');
 const bodyParser = require('body-parser');
 require('./db');
 require('./schemas/GroupChat');
 require('./schemas/Message');
-require('./models/User');
-require('./models/Message');
+require('./schemas/User');
+require('./schemas/Profile');
+const profileRoutes = require('./routes/profileRoutes');
 const authRoutes = require('./routes/AuthRoutes');
 const uploadMediaRoutes = require('./routes/SendFiles');
 const messageRoutes = require('./routes/MessageRoutes');
@@ -32,11 +32,6 @@ app.use(authRoutes);
 app.use(profileRoutes);
 app.use(uploadMediaRoutes);
 app.use(messageRoutes);
-
-// app.get('/', (req, res) => {
-//     res.send("Hello World");
-// })
-
 
 //...........18
 

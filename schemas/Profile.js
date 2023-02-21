@@ -4,6 +4,7 @@ const ProfileSchema = new mongoose.Schema({
     utorid: {
         type: String,
         required: true,
+        unique: true
     }, 
     name: {
         type: String,
@@ -58,13 +59,17 @@ const ProfileSchema = new mongoose.Schema({
         default: ''
         //required: true
     },
-    chat_id: {
-        type: [String],
-        default: ['']
+    chatid: {
+        type: Array,
+        default: []
     },
     match_id: {
         type: String,
         default: ''
+    },
+    allmessages:{
+        type: Array,
+        default: []
     }
 });
 

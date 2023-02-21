@@ -7,11 +7,12 @@ const GroupChat = mongoose.model("GroupChat");
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const nodemailer = require("nodemailer");
+const Profile = mongoose.model("Profile");
 // const bcrypt = require("bcrypt");
 
 
 router.post('/savemessagetodb', async (req, res) => {
-    const { senderid, message,recieverid } = req.body;
+    const { senderid, message, chatid, recieverid } = req.body;
     console.log("MESSAGE RECEIVED - ", req.body);
     try {
         const newMessage = new Message({
@@ -32,7 +33,7 @@ router.post('/getmessages', async (req, res) => {
     const { chatid } = req.body;
     console.log("ROOM ID RECEIVED - ", chatid);
 
-    Message.find({ chatid: chatid })
+    Message.find({chatid: chatid})
         .then(messages => {
             res.status(200).send(messages);
         })
@@ -43,39 +44,40 @@ router.post('/getmessages', async (req, res) => {
 
 
 router.post('/setusermessages', async (req, res) => {
-    const { ouruserid, fuserid, lastmessage, chatid} = req.body;
-    console.log("MESSAGE ID RECEIVED - ", fuserid);
-    User.findOne({ _id: ouruserid })
-        .then(user => {
-            user.allmessages.map((item) => {
-                if(item.fuserid == fuserid){
-                    user.allmessages.pull(item);
-                }
+    const { userid, receiverid, lastmessage, chatid} = req.body;
+    for(const fuserid of receiverid){
+        console.log("MESSAGE ID RECEIVED - ", fuserid);
+        Profile.find({ _id: userid })
+            .then(user => {
+                user.allmessages.map((item) => {
+                    if(item.fuserid == fuserid){
+                        user.allmessages.pull(item);
+                    }
+                })
+                const date = Date.now();
+                user.chatid.push({ userid , fuserid, lastmessage, chatid , date });
+                user.save()
+                res.status(200).send({ message: "Message saved successfully" });
             })
-            const date = Date.now();
-            user.allmessages.push({ ouruserid , fuserid, lastmessage, chatid ,date });
-            user.save()
-            res.status(200).send({ message: "Message saved successfully" });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(422).send(err.message);
-        });
+            .catch(err => {
+                console.log(err);
+                res.status(422).send(err.message);
+            });
+    }
 });
 
 
 router.post('/getusermessages', async (req, res) => {
-    const { userid } = req.body;
-    console.log("USER ID RECEIVED - ", userid);
-    User.findOne({ _id: userid })
+    const { chatid } = req.body;
+    console.log("USER ID RECEIVED - ", chatid);
+    Profile.find({ _id: chatid })
         .then(user => {
-            res.status(200).send(user.allmessages);
+            res.status(200).send(user.chatid);
         })
         .catch(err => {
             console.log(err);
             res.status(422).send(err.message);
         });
 });
-
 
 module.exports = router;
