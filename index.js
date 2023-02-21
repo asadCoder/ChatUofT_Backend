@@ -14,20 +14,6 @@ app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(profileRoutes);
 
-//I dont think we need these, just listen works??
-// app.get('/', (req, res)=>{
-//     res.send("hello get");
-// })
-
-// app.post('/', (req, res)=>{
-//     res.send("hello post");
-// })
-
-
-//app.use(bodyParser.urlencoded({
-   // extended: true
-//}));
-
 app.listen(port, ()=>{
     console.log("Server is running on port " + port);
 });

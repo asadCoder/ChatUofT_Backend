@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 router.post('/signup', async (req, res)=>{
     const {utorid, email, password} = req.body;
 
-    if(!email || !utorid || !password){
+    if(!utorid || !email || !password){
         return res.status(422).json({error: "please fill all the fields"});
     }
     else{
@@ -39,7 +39,7 @@ router.post('/signup', async (req, res)=>{
     }
 })
 
-router.get('/login', (req, res)=>{
+router.post('/login', (req, res)=>{
     const {email, password} = req.body;
     if(!email || !password){
         return res.status(422).json({message: "please fill all the fields"});
