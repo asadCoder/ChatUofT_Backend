@@ -52,7 +52,7 @@ router.post('/addcourse', async (req, res) => {
     });
 });
 
-router.get('/fetchprofile', async (req, res) => {
+router.post('/fetchprofile', async (req, res) => {
     const utorid = req.body.userId;
     const db = mongoose.connection.db;
     db.collection('profiles').find().toArray((courses, results) => {
