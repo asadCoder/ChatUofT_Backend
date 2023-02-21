@@ -38,9 +38,11 @@ async function main() {
     await copyCoursesToChatId();
     
     console.log('Courses copied to chat_id successfully.');
+    return;
   } catch (error) {
     console.error(error);
   }
 }
 
 main();
+
