@@ -1,13 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const mongoose = require("mongoose");
-
 const jwt = require('jsonwebtoken');
-
-require('dotenv').config();
-
 const Profile = mongoose.model("Profile");
-;
+const db = mongoose.connection.db;
+
 
 router.get('/profile', (req, res) => {
     res.send(req.body);
@@ -15,7 +13,6 @@ router.get('/profile', (req, res) => {
 
 router.post('/addinterest', async (req, res) => {
     const interests = req.body.interests;
-    const db = mongoose.connection.db;
     db.collection('profiles').find().toArray((courses, results) => {
         for (const result of results) {
             if (result.utorid === req.body.utorid) {
@@ -35,7 +32,6 @@ router.post('/addinterest', async (req, res) => {
 
 router.post('/addcourse', async (req, res) => {
     const course = req.body.course;
-    const db = mongoose.connection.db;
     db.collection('profiles').find().toArray((courses, results) => {
         for (const result of results) {
             if (result.utorid === req.body.utorid) {
@@ -54,7 +50,6 @@ router.post('/addcourse', async (req, res) => {
 
 router.post('/fetchprofile', async (req, res) => {
     const utorid = req.body.userId;
-    const db = mongoose.connection.db;
     db.collection('profiles').find().toArray((courses, results) => {
         for (const result of results) {
             if (result.utorid === utorid) {
@@ -64,6 +59,7 @@ router.post('/fetchprofile', async (req, res) => {
     });
 });
 
+//not working atm 
 router.post('/fetchMockChat', async (req, res) => {
     return res.status(200).json({
         id: "1",
@@ -127,9 +123,7 @@ router.post('/newprofile', async (req, res) => {
 
 });
 
-router.delete('/profile', (req, res) => {
-    res.send("verify called");
-    res.send("verify called");
-});
+
+
 
 module.exports = router;
